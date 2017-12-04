@@ -10,7 +10,6 @@
   "dependencies": {
     "babel-eslint": "^8.0.3",
     "classnames": "^2.2.5",
-    "custom-react-scripts": "^0.2.1",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-react-app": "^2.0.1",
@@ -30,6 +29,9 @@
     "semantic-ui-react": "^0.73.1",
     "validatorjs": "^3.13.5"
   },
+  "devDependencies": {
+    "custom-react-scripts": "^0.2.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -38,6 +40,7 @@
     "eslint-autofix": "eslint --fix \"src/**/*.js\"",
     "lint": "eslint \"src/**/*.js\"",
     "heroku-prebuild": "npm i -g pm2 && pm2 install pm2-logrotate",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "reinstall": "rimraf node_modules && yarn"
   }
 }
