@@ -6,4 +6,8 @@
     {
       "url": "heroku/nodejs"
     }
-  ]}
+  ],
+  "env": {
+    "REACT_APP_DECORATORS": true
+  }
+}
