@@ -3,13 +3,13 @@ import { observer, inject } from 'mobx-react';
 import createForm from '../forms/form';
 import UserForm from '../components/user-form';
 
-@inject("stores") @observer
+@inject('stores') @observer
 class UserFormPage extends Component {
 
   form = null;
   fields = {
-    _id: this.makeRandomId(),
-    name:{
+    id: this.makeRandomId(),
+    name: {
       name: 'name',
       label: 'Name',
       placeholder: 'Enter your name',
@@ -29,38 +29,37 @@ class UserFormPage extends Component {
     }
   };
 
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.form = createForm(this.fields, this.props.stores.userStore);
   }
 
   makeRandomId() {
-    let text = "";
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-    for (let i = 0; i < 5; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    for (let i = 0; i < 5; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)); }
 
     return text;
   }
 
   componentDidMount() {
-    const { _id } = this.props.match.params;
-    const { userStore:store } = this.props.stores;
-    if(_id){
-      store.fetch(_id)
+    const { id } = this.props.match.params;
+    const { userStore: store } = this.props.stores;
+    if (id) {
+      store.fetch(id);
     } else {
       store.newEntity();
     }
   }
 
   render() {
-    const { userStore:store } = this.props.stores;
+    const { userStore: store } = this.props.stores;
     return (
       <div>
-        <UserForm store={store} form={this.form} user={store.entity}/>
+        <UserForm store={store} form={this.form} user={store.entity} />
       </div>
-    )
+    );
   }
 }
 

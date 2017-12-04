@@ -18,7 +18,7 @@ class Store {
     this.entity = {};
     this.errors = {};
   }
-  
+
   @action
   resetRedirect() {
     this.redirect = false;
@@ -26,94 +26,93 @@ class Store {
 
   @action
   handleErrors = (err) => {
-    if( err.code === 400) {
-      let messages = [];
+    if (err.code === 400) {
+      const messages = [];
       _.each(err.errors, (value, key) => {
         messages.push(value.message);
-      })
-      this.errors = {global: err.message, messages}
+      });
+      this.errors = {global: err.message, messages};
     } else {
-      this.errors = {global: err.message}
+      this.errors = {global: err.message};
     }
     this.loading = false;
   }
 
   @action
-  fetchAll = async() => {
+  fetchAll = async () => {
     this.startAsync();
-    try{
+    try {
       runInAction('populate entities', () => {
         this.entities = this.entities;
         this.loading = false;
       });
-    } catch(err) {
-        this.handleErrors(err);
+    } catch (err) {
+      this.handleErrors(err);
     }
   }
 
   @action
-  fetch = async(_id) => {
+  fetch = async (id) => {
     this.startAsync();
     try {
-      let response = this.entity
+      let response = this.entity;
       this.entities.map((value, index) => {
-        if (value._id === _id) {
-          response = value
+        if (value.id === id) {
+          response = value;
         }
-        return true
+        return true;
       });
       runInAction('entity fetched', () => {
         this.entity = response;
         this.loading = false;
-      })
-    } catch(err) {
-      this.handleErrors(err)
+      });
+    } catch (err) {
+      this.handleErrors(err);
     }
   }
 
   @action
-  create = async(entity) => {
+  create = async (entity) => {
     this.startAsync();
-    try{
-      await setTimeout(()=>{}, 1000)
+    try {
+      await setTimeout(() => {}, 1000);
       runInAction('entity created', () => {
         this.entities.push(entity);
         this.redirect = true;
         this.loading = false;
       });
-    } catch(err) {
-        this.handleErrors(err);
+    } catch (err) {
+      this.handleErrors(err);
     } finally {
       this.resetRedirect();
     }
   }
 
   @action
-  update = async(_id, entity) => {
+  update = async (id, entity) => {
     this.startAsync();
-    try{
-      await setTimeout(()=>{}, 1000)
+    try {
+      await setTimeout(() => {}, 1000);
       runInAction('entity updated', () => {
-        this.entities = this.entities.map(item => item._id === _id ? entity : item);
+        this.entities = this.entities.map(item => (item.id === id ? entity : item));
         this.redirect = true;
         this.loading = false;
-      })
-    } catch(err) {
-      this.handleErrors(err)
+      });
+    } catch (err) {
+      this.handleErrors(err);
     } finally {
       this.redirect = false;
     }
   }
 
   @action
-  deleteOne = async(_id) => {
+  deleteOne = async (id) => {
     try {
       runInAction('entity deleted', () => {
-        this.entities = this.entities.filter(item => item._id !== _id)
-      })
-    }
-    catch(err) {
-      this.handleErrors(err)
+        this.entities = this.entities.filter(item => item.id !== id);
+      });
+    } catch (err) {
+      this.handleErrors(err);
     }
   }
 }

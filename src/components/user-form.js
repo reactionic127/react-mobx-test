@@ -8,29 +8,29 @@ import InputField from '../forms/input-field';
 class UserForm extends React.Component {
 
   componentWillReceiveProps = (nextProps) => {
-    const user = nextProps.user;
+    const {user} = nextProps;
     this.props.form.update(user);
   }
 
   onChange() {
-    
+
   }
 
   render() {
     const { form } = this.props;
-    const { redirect, loading, errors, entity:user } = this.props.store;
+    const { redirect, loading, errors, entity: user } = this.props.store;
     const messages = errors.messages ? errors.messages.toJS() : [];
 
     const errorMessages = (
-      <Message negative header={errors.global} list={messages.reverse()}/>
-    )
+      <Message negative header={errors.global} list={messages.reverse()} />
+    );
 
     const userForm = (
       <Form onSubmit={form.onSubmit} loading={loading}>
-        <InputField field={form.$('name')}/>
+        <InputField field={form.$('name')} />
         <InputField field={form.$('age')} />
         <InputField field={form.$('gender')} />
-        <Button primary type='submit' onClick={form.onSubmit} disabled={form.isPristine}>Save User</Button>
+        <Button primary type="submit" onClick={form.onSubmit} disabled={form.isPristine}>Save User</Button>
       </Form>
     );
 
@@ -38,7 +38,7 @@ class UserForm extends React.Component {
       <div>
         <Grid centered columns={2}>
           <Grid.Column>
-            <h1 style={{marginTop:"1em"}}>{ user._id ? 'Edit User' : 'Add New User' }</h1>
+            <h1 style={{marginTop: '1em'}}>{ user.id ? 'Edit User' : 'Add New User' }</h1>
             {errors.global && errorMessages }
             {userForm}
           </Grid.Column>

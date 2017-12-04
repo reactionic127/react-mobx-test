@@ -12,56 +12,56 @@ class UserList extends Component {
   }
 
   render() {
-    const { entities:users, loading, errors, deleteOne } = this.props.store;
+    const { entities: users, loading, errors, deleteOne } = this.props.store;
     const messages = errors.messages ? errors.messages.toJS() : [];
 
     const errorMessages = (
-      <Message negative header={errors.global} list={messages.reverse()}/>
-    )
+      <Message negative header={errors.global} list={messages.reverse()} />
+    );
 
     const cards = () => {
       return users.map((user) => {
         return (
-          <UserCard key={user._id} user={user} deleteUser={deleteOne}/>
-        )
+          <UserCard key={user.id} user={user} deleteUser={deleteOne} />
+        );
       });
-    }
+    };
 
     const fetchingMessage = (
       <Message icon info>
-        <Icon name='circle notched' loading />
+        <Icon name="circle notched" loading />
         <Message.Content>
-           <Message.Header>Just one moment</Message.Header>
+          <Message.Header>Just one moment</Message.Header>
            We are fetching that content for you.
-       </Message.Content>
+        </Message.Content>
       </Message>
-    )
+    );
 
     const emptyMessage = (
       <Message icon info>
-        <Icon name='warning circle' />
+        <Icon name="warning circle" />
         <Message.Content>
-           <Message.Header>No User Found</Message.Header>
-           <span>Add some new user to get started..</span>
-          <Link to={'/users/new'} className="ui button primary right floated">Add New User</Link>
-       </Message.Content>
+          <Message.Header>No User Found</Message.Header>
+          <span>Add some new user to get started..</span>
+          <Link to="/users/new" className="ui button primary right floated">Add New User</Link>
+        </Message.Content>
       </Message>
-    )
+    );
 
     const userCards = (
       <Card.Group>
         {cards()}
       </Card.Group>
-    )
+    );
 
     return (
       <div>
         { loading && fetchingMessage }
-        { users.length === 0 && !loading  && !errors.global && emptyMessage }
+        { users.length === 0 && !loading && !errors.global && emptyMessage }
         { errors.global && errorMessages}
         { userCards }
       </div>
-    )
+    );
   }
 }
 

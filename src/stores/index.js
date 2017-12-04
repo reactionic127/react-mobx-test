@@ -2,9 +2,9 @@ import remotedev from 'mobx-remotedev';
 import Store from './store';
 
 const userConfig = {
-  name:'Users Store',
+  name: 'Users Store',
   global: true,
-  onlyActions:true,
+  onlyActions: true,
   filters: {
     whitelist: /fetch|update|create|Event|entity|entities|handleErrors/
   }

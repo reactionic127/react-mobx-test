@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import UserList from '../components/user-list';
 import { inject } from 'mobx-react';
+import UserList from '../components/user-list';
 
-@inject("stores")
+@inject('stores')
 class UserListPage extends Component {
   render() {
     return (
@@ -10,7 +10,7 @@ class UserListPage extends Component {
         <h1>List of Users</h1>
         <UserList store={this.props.stores.userStore} />
       </div>
-    )
+    );
   }
 }
 
