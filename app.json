@@ -1,8 +1,9 @@
 {
-  "name": "react-mobx-test",
+  "name": "reactmobxtest",
+  "scripts": {},
+  "addons": [],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
     }
-  ]
-}
+  ]}
