@@ -1,0 +1,8 @@
+{
+  "name": "react-mobx-test",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
